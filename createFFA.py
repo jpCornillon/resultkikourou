@@ -45,7 +45,7 @@ class BaseFFA(object):
     def createDB(self):
         db = sqlite3.connect('sql/baseFFA.db')
         try:
-            cursor =db.cursor()
+            cursor = db.cursor()
             # creation de la table resultats
             cursor.execute('''create table if not exists resultats (
                 annee integer,
@@ -99,7 +99,6 @@ class BaseFFA(object):
                         fic.write('{};{};{};{};{};{};{}\n'.format(self.annee, mm, jj, dept, ville, numero, titre))
         return True
     
-    #def ficCSV(self):
     def insertDB(self):
         cursor = self.db
         problems = []
