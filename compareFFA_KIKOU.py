@@ -21,6 +21,8 @@ from lib import rulesBaseFFA  as FFA
 FICDIR = '{}/dropbox/kikourou_ori/'.format(os.environ['HOME'])
 BOLD = "\033[1m"
 RESET = "\033[0;0m"
+DB = sqlite3.connect('sql/baseFFA.db')
+CURSOR = DB.cursor()
 #
 #####################################################
 
@@ -70,27 +72,39 @@ def sup_accent(ligne):
             for accented_char in accented_chars:
                 ligne = ligne.replace(accented_char, char)
         return ligne
+
 def searchFFA(d):   
-    pass
-    # print(d)
+    annee, mois, jour, departement = d
+    sqlbase = 'select annee, mois, jour, ville, titre, numero, departement from resultats where '
+    where = ' annee={} and mois={} and jour={} and departement={}'.format(annee, mois, jour, "'{0:03d}'".format(int(departement)))
+    sql = sqlbase + where
+    CURSOR.execute(sql)
+    return CURSOR
+    #  for row  in CURSOR:
+        #  print('\t - {:04}-{:02}-{:02}  {:25}: {} N°{:6} ({:3})'.format(*row))
 
 
 def main():
     f = ApplyRegex(FFA.patterns)
     # tous les liens qui pointent vers un fichier KiKourou
-    # links = list(set(lec_html()))
-    # links.sort()
-    # links = list(set(links))
     kikous = open('allcourseskikou.csv').readlines()
-    #kikous = list(set(kikous))
     kikous = [ k.strip() for k in set(kikous) ]
     for k in kikous:
+        i = 0
+        l3 = ''
         annee, mois, jour, ville, departement = k.split(';')
-        print('\n' + '*'*(42 + len(ville) + len(mois) + len(jour)))
-        print('Recherche pour {} ({}) à la date du {}-{}-{} :'.format(ville, departement, annee, mois, jour))
-        d = (annee, mois, jour, ville, departement)
-        print('*'*(42 + len(ville) + len(mois) + len(jour)))
-        searchFFA(d)
+        l1 = '\n' + '*'*(42 + len(ville) + len(mois) + len(jour))
+        l2 = '\nRecherche pour {} ({}) à la date du {}-{}-{} :'.format(ville, departement, annee, mois, jour)
+        # print('\n' + '*'*(42 + len(ville) + len(mois) + len(jour)))
+        # print('Recherche pour {} ({}) à la date du {}-{}-{} :'.format(ville, departement, annee, mois, jour))
+        d = (annee, mois, jour, departement)
+        #print('*'*(42 + len(ville) + len(mois) + len(jour)))
+        cursor = searchFFA(d)
+        for row  in cursor:
+            i += 1
+            l3 += '\n\t - {:04}-{:02}-{:02}  {:25}: {} N°{:6} ({:3})'.format(*row)
+            #print('\t - {:04}-{:02}-{:02}  {:25}: {} N°{:6} ({:3})'.format(*row))
+        if i > 0 : print(l1 + l2 + l3 + l1)
 #
 #####################################################
 #

@@ -109,23 +109,17 @@ class BaseFFA(object):
                     d = (annee, mois, jour, departement, ville, numero, titre)  
                     cursor.execute('''insert or replace into resultats (annee, mois, jour, departement, ville, numero, titre) 
                         values(?, ?, ?, ?, ?, ?, ?)''', d)
-                    self.db.commit()
+                    #self.db.commit()
                 except:
                     print('Probleme pour : ', line)
                     problems.append(line)
+        self.db.commit()
+        cursor.close()
+        self.db.close()
         if len(problems) == 0:
             print('Pas de soucis !!!')
         else:
             for problem in problems: print(problem)
-        return
-
-    def insertDB_old(self, d):
-        print(d)
-        cursor = self.db
-        # ici : https://stackoverflow.com/questions/28261090/sqlite-insert-if-not-exist-update-if-exist
-        cursor.execute('''insert or replace into resultats (annee, mois, jour, departement, ville, numero, titre)  
-                 values(?, ?, ?, ?, ?, ?, ?)''', d)
-        self.db.commit()
         return
 
     def nb_page(self):

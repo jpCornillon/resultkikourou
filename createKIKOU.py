@@ -26,6 +26,11 @@ RESET = "\033[0;0m"
 
 def lec_html():
     '''lecture/extraction des liens de la page résultat de chez kikourou'''
+    # A VOIR POUR EVITER LES PROBLEMES D ENCODAGE
+    #req=urlopen(self.url.format(page))
+    #charset=req.info().get_content_charset()
+    #content=req.read().decode(charset)
+
     URL = FICDIR+'/fichiers/source/kikourou_files/resultats.htm'
     html = open(URL, 'r')
     soup = BeautifulSoup(html, 'lxml')
@@ -39,6 +44,7 @@ def lec_specCourse(course):
     div = soup.find('div', { 'class' : 'contenu-texte'})
     lieuCourse = div.find('a').text
     datas = [ data.previous_sibling for data in div.findAll('br') if '\n' not in data]
+    print(datas)
     dateCourse = trtDate(datas[1])
     depCourse = trtDepartement(datas[2].lstrip())
     kmCourse = datas[3]
@@ -84,7 +90,6 @@ def main():
             fic, ext = os.path.splitext(l)
             fic = fic.split('/')[-1]
             datas = lec_specCourse(l)
-            print(datas)
             f.write('{}\n'.format(datas))
 #
 #####################################################

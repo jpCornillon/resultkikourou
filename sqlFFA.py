@@ -65,7 +65,7 @@ class BaseFFA(object):
             i = 0
             for k, v in kwargs.items():
                 # <moche>
-                if k == 'v': kwargs[k]="'{}'".format(kwargs[k])
+                if k == 'v': kwargs[k]="'{}'".format(prikwargs[k])
                 if k == 'd': kwargs[k]="'{}'".format(kwargs[k])
                 # </moche>
                 if i == 0:
@@ -82,10 +82,6 @@ class BaseFFA(object):
 
         db = sqlite3.connect('sql/baseFFA.db')
         cursor =db.cursor()
-        # col = 'departement'
-        # dep = '069'
-        #cursor.execute('''select annee, mois, jour, ville, titre, numero, departement from resultats
-        #     where ?=?''', (col, dep,))
         cursor.execute(sql)
         for row  in cursor:
             print('{:04}-{:02}-{:02}  {:25}: {} N°{:6} ({:3})'.format(*row))
@@ -105,21 +101,7 @@ def main(argv):
     else:
         param = { k : v for k, v in [ i.split('=') for i in argv ]}
 
-    #if len(argv) == 1:
-    #    param = dict({'annee': argv[0]})
-    #elif len(argv) == 2:
-    #    param=dict({'annee': argv[0], 'mois': argv[1]})
-    #elif len(argv) == 3:
-    #    param=dict({'annee': argv[0], 'mois': argv[1], 'departement': argv[2]})
-    #elif len(argv) == 4:
-    #    param=dict({'annee': argv[0], 'mois': argv[1], 'jour': argv[2], 'departement': argv[3] })
-    #    #param='annee={} mois={} departement={}'.format(argv[0], argv[1], argv[2])
-    #else:
-    #    print('Nombre d\'arguments non valable !!!!!')
-    #    exit(1)
-    #exit(1)
     ffa = BaseFFA()
-    #ffa.ficCSV('baseFFA_2017.csv')
     ffa.readDB(**param)
     return 0
 
