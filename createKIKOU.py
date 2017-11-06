@@ -32,7 +32,7 @@ def lec_html():
     #content=req.read().decode(charset)
 
     URL = FICDIR+'/fichiers/source/kikourou_files/resultats.htm'
-    html = open(URL, 'r')
+    html = open(URL, 'rb')
     soup = BeautifulSoup(html, 'lxml')
     return [ s.get('href') for s in soup.select("body td > a") if 'calendrier' in s.get('href') ]
 
@@ -81,7 +81,9 @@ def sup_accent(ligne):
 def main():
     f = ApplyRegex(FFA.patterns)
     #tous les liens qui pointent vers un fichier KiKourou
-    links = list(set(lec_html()))
+    #links = list(set(lec_html()))
+    links = lec_html()
+    import pdb; pdb.set_trace()
     # links.sort()
     #links = list(set(links))
     with open('allcourseskikou.csv', 'w') as f:

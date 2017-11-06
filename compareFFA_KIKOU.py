@@ -88,23 +88,20 @@ def main():
     f = ApplyRegex(FFA.patterns)
     # tous les liens qui pointent vers un fichier KiKourou
     kikous = open('allcourseskikou.csv').readlines()
-    kikous = [ k.strip() for k in set(kikous) ]
+    kikous.sort()
+    #kikous = [ k.strip() for k in set(kikous) ]
     for k in kikous:
         i = 0
         l3 = ''
         annee, mois, jour, ville, departement = k.split(';')
-        l1 = '\n' + '*'*(42 + len(ville) + len(mois) + len(jour))
-        l2 = '\nRecherche pour {} ({}) à la date du {}-{}-{} :'.format(ville, departement, annee, mois, jour)
-        # print('\n' + '*'*(42 + len(ville) + len(mois) + len(jour)))
-        # print('Recherche pour {} ({}) à la date du {}-{}-{} :'.format(ville, departement, annee, mois, jour))
+        # l1 = '\n' + '*'*(42 + len(ville) + len(mois) + len(jour))
+        l2 = '\nRecherche pour {} ({}) à la date du {}-{}-{} :'.format(ville, departement.strip(), annee, mois, jour)
         d = (annee, mois, jour, departement)
-        #print('*'*(42 + len(ville) + len(mois) + len(jour)))
         cursor = searchFFA(d)
         for row  in cursor:
             i += 1
             l3 += '\n\t - {:04}-{:02}-{:02}  {:25}: {} N°{:6} ({:3})'.format(*row)
-            #print('\t - {:04}-{:02}-{:02}  {:25}: {} N°{:6} ({:3})'.format(*row))
-        if i > 0 : print(l1 + l2 + l3 + l1)
+        if i > 0 : print(l2 + l3 )
 #
 #####################################################
 #

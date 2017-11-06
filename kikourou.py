@@ -222,6 +222,15 @@ class Course(Tools):
             self.participants = self.nb_participants()
             self.nb_page = int(self.participants / 200) + 1
             self.fic_epreuve = '{}_{}.csv'.format(self.ficcsv[:-4], epreuve.lower().replace('+', '_'))
+            #    def params(self, self.fic_epreuve):
+            #        fic, ext = os.path.splitext(self.lst_fic[0])
+            #        fic = fic.split('/')[-1]
+            #        _dic = {}
+            #        _dic['ficpdf'] = '{}{}.pdf'.format(FICDIR, fic)
+            #        _dic['ficcsv'] = '{}{}.csv'.format(FICDIR, fic)
+            #        _dic['fictxt'] = '{}{}.txt'.format(FICDIR, fic)
+            #        _dic['fichtm'] = '{}{}.htm'.format(FICDIR, fic)
+            #        return _dic
             for page in range(0, self.nb_page):
                 self.url_epreuve = url.format(self.numcourse, epreuve.lower(), page)
                 if self.nb_participants() > 0:
@@ -337,7 +346,7 @@ def opt(argv):
         auto = True
         argv.remove('auto')
 
-    #uniquementun nom de fichier
+    #uniquement un nom de fichier
     if len(argv) == 1:
         #on recupere uniquement le nom du fichier
         dic = {}
@@ -359,7 +368,7 @@ def opt(argv):
         parser_a.set_defaults(which='calendrier')
         parser_a.add_argument("-d", "--dept", action="store", dest="dept", default='069', help="Departement a rechercher")
         parser_a.add_argument("-m", "--mois", action="store", dest="mois", default='6', type=int, help="Mois recherché en numerique")
-        parser_a.add_argument("-a", "--annee", action="store", dest="annee", default='2016', type=int, help="Année recherchée")
+        parser_a.add_argument("-a", "--annee", action="store", dest="annee", default='2017', type=int, help="Année recherchée")
     
         # recherche resultat d'une course
         parser_b = subparsers.add_parser('course', help='Consultation d\'une course')
@@ -395,7 +404,6 @@ def main(argv):
     f = Factory.get_factory(options['which'])
     
     #creation/lancement objet
-    #c = f.genClass()
     c = f.genClass(options)
     c.options = options
     c.start()
