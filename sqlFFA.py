@@ -11,41 +11,9 @@ class BaseFFA(object):
 
     def __init__(self):
         super(BaseFFA, self).__init__()
-        #self.db = self.createDB()
         self.db = sqlite3.connect('sql/baseFFA.db')
         
-#    def createDB(self):
-#        try:
-#            db = sqlite3.connect('sql/baseFFA.db')
-#            cursor =db.cursor()
-#            # creation de la table resultats
-#            cursor.execute('''create table if not exists resultats (
-#                annee integer,
-#                mois integer,
-#                jour integer,
-#                departement text,
-#                ville text,
-#                numero integer,
-#                titre text),
-#                primary key ('annee', 'mois', 'jour', 'departement', 'ville', 'numero')''')
-#            db.commit()
-#            cursor.close()
-#            db.close()
-#        except:
-#            print('Base/Table déja créees !!!!')
-#        return db
-    
-#    def insertDB(self, d):
-#        print(d)
-#        cursor = self.db
-#        # ici : https://stackoverflow.com/questions/28261090/sqlite-insert-if-not-exist-update-if-exist
-#        cursor.execute('''insert or replace into resultats (annee, mois, jour, departement, ville, numero, titre)  
-#                 values(?, ?, ?, ?, ?, ?, ?)''', d)
-#        self.db.commit()
-#        return
-
     def readDB(self, *kargs, **kwargs):
-        print(kwargs)
         dic = dict({'aa': 'annee', 'mm': 'mois', 'jj':'jour', 'd': 'departement', 'v': 'ville'})
         #sqlbase = 'select annee, mois, jour, ville, titre, numero, departement from resultats'
         if len(kwargs.keys()) == 0:
@@ -76,7 +44,7 @@ class BaseFFA(object):
                     where = ' and {}={}'
                     add_where += where.format(dic[k], kwargs[k])
                 sql = sqlbase + add_where
-            print('sql : ', sql)
+            # print('sql : ', sql)
             #VOIR CASE SUR LES REQUETES WHERE 
             #VOIR UN EVENTUEL LIKE
 
@@ -89,7 +57,6 @@ class BaseFFA(object):
     def ficCSV(self, fic):
         with open(fic, 'r') as f:
             for line in f.readlines():
-                #print(line.strip().split(';'))
                 annee, mois, jour, departement, ville, numero, titre = line.strip().split(';')
                 d = (annee, mois, jour, departement, ville, numero, titre)  
                 self.insertDB(d)
