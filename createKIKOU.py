@@ -83,7 +83,6 @@ def main():
     #tous les liens qui pointent vers un fichier KiKourou
     #links = list(set(lec_html()))
     links = lec_html()
-    import pdb; pdb.set_trace()
     # links.sort()
     #links = list(set(links))
     with open('allcourseskikou.csv', 'w') as f:
@@ -91,7 +90,7 @@ def main():
             '''link_courses_kikou : liste des courses chez kikourou'''
             fic, ext = os.path.splitext(l)
             fic = fic.split('/')[-1]
-            datas = lec_specCourse(l)
+            datas = '{};{}'.format(lec_specCourse(l), l)
             f.write('{}\n'.format(datas))
 #
 #####################################################

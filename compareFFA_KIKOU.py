@@ -93,9 +93,9 @@ def main():
     for k in kikous:
         i = 0
         l3 = ''
-        annee, mois, jour, ville, departement = k.split(';')
+        annee, mois, jour, ville, departement, nom_kikou = k.split(';')
         # l1 = '\n' + '*'*(42 + len(ville) + len(mois) + len(jour))
-        l2 = '\nRecherche pour {} ({}) à la date du {}-{}-{} :'.format(ville, departement.strip(), annee, mois, jour)
+        l2 = '\nRecherche pour {} ({}) à la date du {}-{}-{} ({}):'.format(ville, departement.strip(), annee, mois, jour, nom_kikou.replace('/calendrier/', '').strip())
         d = (annee, mois, jour, departement)
         cursor = searchFFA(d)
         for row  in cursor:
