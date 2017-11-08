@@ -95,7 +95,8 @@ def main():
         l3 = ''
         annee, mois, jour, ville, departement, nom_kikou = k.split(';')
         # l1 = '\n' + '*'*(42 + len(ville) + len(mois) + len(jour))
-        l2 = '\nRecherche pour {} ({}) à la date du {}-{}-{} ({}):'.format(ville, departement.strip(), annee, mois, jour, nom_kikou.replace('/calendrier/', '').strip())
+        nom_kikou = nom_kikou.replace('/calendrier/', '')[:-6].strip()
+        l2 = '\nRecherche pour {} ({}) à la date du {}-{}-{} ({}):'.format(ville, departement.strip(), annee, mois, jour, nom_kikou)
         d = (annee, mois, jour, departement)
         cursor = searchFFA(d)
         for row  in cursor:
