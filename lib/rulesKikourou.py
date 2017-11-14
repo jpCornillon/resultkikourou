@@ -3,7 +3,7 @@ patterns = \
          (r'[\n\r\t]', '', False )                                         ,  # tous les caracteres pourris de tabulation (tab, rc, ...)
          (r'[?"]', '', False)                                              ,  # tous les caracteres a supprimer
          (r'[éèêë]', 'e', False)                                           ,  # remplacement des accents
-         (r'[ÉÈÊË]', 'E', False)                                           ,  # remplacement des accents
+         (r'[ÉÈÉÈÊË]', 'E', False)                                         ,  # remplacement des accents
          (r'[C]', 'C', False)                                              ,  #remplacement des accents
          (r'[Ç]', 'C', False)                                              ,  #remplacement des accents
          (r'[ÔÓ]', 'O', False)                                             ,  #remplacement des accents
