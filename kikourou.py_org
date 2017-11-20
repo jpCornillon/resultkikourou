@@ -12,7 +12,6 @@ from urllib.request import urlopen, ProxyHandler       # sudo dnf install  pytho
 import socket
 from bs4 import BeautifulSoup                          # sudo dnf install python3-beautifulsoup
 import chardet                                         # detection encodage fichier (installé d'origine ???)
-from time import sleep
 # classes locales
 # fichier des regexp
 from lib import ApplyRegex
@@ -221,11 +220,18 @@ class Course(Tools):
             self.coureurs = []
             self.url_epreuve = url.format(self.numcourse, epreuve.lower(), 0)
             self.participants = self.nb_participants()
-            self.nb_page = int(self.participants / 250) + 1
+            self.nb_page = int(self.participants / 200) + 1
             self.fic_epreuve = '{}_{}.csv'.format(self.ficcsv[:-4], epreuve.lower().replace('+', '_'))
+            #    def params(self, self.fic_epreuve):
+            #        fic, ext = os.path.splitext(self.lst_fic[0])
+            #        fic = fic.split('/')[-1]
+            #        _dic = {}
+            #        _dic['ficpdf'] = '{}{}.pdf'.format(FICDIR, fic)
+            #        _dic['ficcsv'] = '{}{}.csv'.format(FICDIR, fic)
+            #        _dic['fictxt'] = '{}{}.txt'.format(FICDIR, fic)
+            #        _dic['fichtm'] = '{}{}.htm'.format(FICDIR, fic)
+            #        return _dic
             for page in range(0, self.nb_page):
-                # sleep(2)
-                print('page {}/{}'.format( page, self.nb_page))
                 self.url_epreuve = url.format(self.numcourse, epreuve.lower(), page)
                 if self.nb_participants() > 0:
                     self.coureurs += self.lec_html()
@@ -233,33 +239,13 @@ class Course(Tools):
                     print('Aucun participant trouvé pour la course n° {}'.format(self.numcourse))
             # tentative pour ne garder que le bon nombre de participants (probleme de la derniere page)
             self.coureurs = self.coureurs[ :self.participants +1 ]
-            self.entete = 'class;temps;nom;club;cat'
             if self.fic_epreuve:
                 self.coureurs = [self.regFFA(';'.join(coureur)) for coureur in self.coureurs]
-                self.coureurs = self.entete.split() + self.coureurs
-                if self.check_format(): 
-                    self.coureurs =  self.listetodic()
-                else:
-                    with open(self.fic_epreuve, 'w')as out:
-                        for c in self.coureurs:
-                            out.write('{}\n'.format(c))
-                    print(BOLD + '\nProbleme avec le fichier {} \
-                                  \nCorriger le fichier et relancer \'./kikourou.py {}'.format(self.fic_epreuve, self.fic_epreuve) + RESET)
-                    for ano in self.anos_format: print('--> ', ano)
-                    break                
-                ###
-                if self.checkCoureurs(self.coureurs):
-                    dest = self.fic_epreuve.replace('/source/', '/csv/')
-                    self.writeCsv(self.coureurs, dest)
-                    print(BOLD, "  <{}> : correct".format(self.fic_epreuve), RESET)
-                    print(BOLD, "  <{}> : a tranférer sur KiKourou".format(dest), RESET)
-                else:
-                    print(BOLD, 'Fichier {} pourri'.format(self.fic_epreuve), RESET)
-                    self.writeCsv(self.coureurs, self.fic_epreuve)
-                    for cle, valeur in self.anos.items():
-                        print(BOLD, "\nAnomalie de type : ", cle, RESET)
-                        for ano in valeur:
-                            print('   {}'.format(ano))        
+                with open(self.fic_epreuve, 'w') as out:
+                    out.write('class;temps;nom;club;cat\n')
+                    for i in self.coureurs:
+                        out.write('{}\n'.format(i))
+                print('Fichier {} créé avec {} coureurs.'.format(self.fic_epreuve, len(self.coureurs)))
 
     def nb_participants(self):
         # html = urlopen('file:///home/paulo/dropbox/kikourou/testCourse0.htm')
@@ -269,15 +255,12 @@ class Course(Tools):
         return int(re.sub(r'([0-9]+)( .*)', r'\1', ''.join(nb)))
 
     def lec_html(self):
-        coureur  = []
-        coureurs = []
+        coureur = coureurs = []
         html = urlopen(self.url_epreuve)
         soup = BeautifulSoup(html, 'lxml')
         for tr in soup.findAll('tr'):
             coureur = [ td.text for td in tr.findAll('td', class_=["datas0", "datas1"]) if '\xa0' not in td]
-            if coureur != []:
-                # import pdb; pdb.set_trace()
-                coureurs.append(coureur)
+            if coureur != []: coureurs.append(coureur)
         return coureurs
 
     def liste_epreuves(self):

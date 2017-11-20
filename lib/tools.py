@@ -341,6 +341,7 @@ class Tools(MyTools):
                 else:
                     ligne = u'{};{};{};{};{};{};\n'.format(c['class'], c['temps'], c['nom'], c['cat'][0:2], c['sexe'], c['club'].strip())
                 out.write(ligne)
+        out.close()
 
     def checkCoureurs(self, coureurs):
         '''verification du fichier produit et creation d'un tableau des anomalies'''
