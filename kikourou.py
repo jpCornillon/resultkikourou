@@ -218,46 +218,50 @@ class Course(Tools):
         for epreuve in self.liste_epreuves():
             # url = 'http://bases.athle.com/asp.net/liste.aspx?frmbase=resultats&frmmode=1&frmespace=0&frmcompetition={}&frmepreuve={}'
             url = 'http://bases.athle.com/asp.net/liste.aspx?frmbase=resultats&frmmode=1&frmespace=0&frmcompetition={}&frmepreuve={}&frmposition={}'
+            suite = True
             self.coureurs = []
             self.url_epreuve = url.format(self.numcourse, epreuve.lower(), 0)
             self.participants = self.nb_participants()
             self.nb_page = int(self.participants / 250) + 1
             self.fic_epreuve = '{}_{}.csv'.format(self.ficcsv[:-4], epreuve.lower().replace('+', '_'))
+            print(BOLD, '\nTraitement epreuve {} :'.format(self.fic_epreuve.split('/')[-1]), RESET)
             for page in range(0, self.nb_page):
                 # sleep(2)
-                print('page {}/{}'.format( page, self.nb_page))
+                # print('page {}/{}'.format( page, self.nb_page))
                 self.url_epreuve = url.format(self.numcourse, epreuve.lower(), page)
                 if self.nb_participants() > 0:
                     self.coureurs += self.lec_html()
                 else:
-                    print('Aucun participant trouvé pour la course n° {}'.format(self.numcourse))
+                    print('- aucun participant trouvé pour la course n° {}'.format(self.numcourse))
             # tentative pour ne garder que le bon nombre de participants (probleme de la derniere page)
             self.coureurs = self.coureurs[ :self.participants +1 ]
             self.entete = 'class;temps;nom;club;cat'
-            if self.fic_epreuve:
-                self.coureurs = [self.regFFA(';'.join(coureur)) for coureur in self.coureurs]
-                self.coureurs = self.entete.split() + self.coureurs
-                if self.check_format(): 
-                    self.coureurs =  self.listetodic()
-                else:
-                    with open(self.fic_epreuve, 'w')as out:
-                        for c in self.coureurs:
-                            out.write('{}\n'.format(c))
-                    print(BOLD + '\nProbleme avec le fichier {} \
-                                  \nCorriger le fichier et relancer \'./kikourou.py {}'.format(self.fic_epreuve, self.fic_epreuve) + RESET)
-                    for ano in self.anos_format: print('--> ', ano)
-                    break                
+            self.coureurs = [self.regFFA(';'.join(coureur)) for coureur in self.coureurs]
+            self.coureurs = self.entete.split() + self.coureurs
+            if self.check_format(): 
+                self.coureurs =  self.listetodic()
+            else:
+                with open(self.fic_epreuve, 'w')as out:
+                    for c in self.coureurs:
+                        out.write('{}\n'.format(c))
+                print(BOLD + ' - probleme avec le fichier {} \
+                              \n - Corriger le fichier et relancer \'./kikourou.py {}'.format(self.fic_epreuve, self.fic_epreuve) + RESET)
+                for ano in self.anos_format:
+                    print('--> ', ano)
+                    print('')
+                suite = False
                 ###
+            if suite:
                 if self.checkCoureurs(self.coureurs):
                     dest = self.fic_epreuve.replace('/source/', '/csv/')
+                    print(BOLD, ' - <{}> : correct'.format(self.fic_epreuve), RESET)
+                    print(BOLD, ' - <{}> : a tranférer sur KiKourou'.format(dest), RESET)
                     self.writeCsv(self.coureurs, dest)
-                    print(BOLD, "  <{}> : correct".format(self.fic_epreuve), RESET)
-                    print(BOLD, "  <{}> : a tranférer sur KiKourou".format(dest), RESET)
                 else:
-                    print(BOLD, 'Fichier {} pourri'.format(self.fic_epreuve), RESET)
+                    print(BOLD, ' - fichier {} pourri'.format(self.fic_epreuve), RESET)
                     self.writeCsv(self.coureurs, self.fic_epreuve)
                     for cle, valeur in self.anos.items():
-                        print(BOLD, "\nAnomalie de type : ", cle, RESET)
+                        print(BOLD, ' - anomalie de type : ', cle, RESET)
                         for ano in valeur:
                             print('   {}'.format(ano))        
 
@@ -276,7 +280,6 @@ class Course(Tools):
         for tr in soup.findAll('tr'):
             coureur = [ td.text for td in tr.findAll('td', class_=["datas0", "datas1"]) if '\xa0' not in td]
             if coureur != []:
-                # import pdb; pdb.set_trace()
                 coureurs.append(coureur)
         return coureurs
 

@@ -99,6 +99,11 @@ class Tools(MyTools):
             print('fichier non réencodable : plantage !!!!')
             exit(66)
 
+    def detect_code(self, fic):
+        '''retourne l'encodage du fichier'''
+        rawdata = open(fic, 'rb').read()
+        return chardet.detect(rawdata)['encoding']
+
     def fictoliste(self, fichier):
         '''lecture du fichier et retour d'une liste'''
         try:

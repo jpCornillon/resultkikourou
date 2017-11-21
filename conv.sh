@@ -31,11 +31,13 @@ elif [ ${cod_in} = 'HTML' ]
 # tentative pour fichier tout pourri
 elif [ ${cod_in} = 'Non-ISO' ]
     then
-        code='863'
+        code='WINDOWS-1250'
+        # code='863'
 elif [ ${cod_in} = 'ASCII' ]
     then
         echo '   ---> fichier déja codé en Ascii, on ne fait rien !'
         exit 1
+#windows_1250
 else
     echo '   ---> format de fichier non reconnu   !!!! '
     exit 66
