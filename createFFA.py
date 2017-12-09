@@ -134,6 +134,8 @@ class BaseFFA(object):
 
 def main():
     # sur le site de la FFA : faire une recherche (Hors Stade) et copier l'adresse generée
+    # ex : recherche 2017 - Hors stade - du 1/10/2017 au 30/12/2017
+    # copier/coller l'@ du resultat au lancement de ce script
     # ATTENTION : pour le moment if faut que la rercherche retourne plus d'une page de resultat sinon la boucle se plante
 
     url = input('Lien : ')

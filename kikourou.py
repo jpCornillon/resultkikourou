@@ -289,6 +289,9 @@ class Course(Tools):
         soup = BeautifulSoup(html, 'lxml')
         td = [ td for td in soup.findAll('td',{ "class" : "barInputs" }) ]
         options = td[3].findAll('option')
+        ### si une seule épreuve à rechercher : 
+        ### http://bases.athle.com/asp.net/liste.aspx?frmbase=resultats&frmmode=1&frmespace=0&frmcompetition=192341&frmepreuve=13+km
+        ### return ['13+km']
         return [ option.get('value') for option in options if option.get('value') ]
 
     def display(self):

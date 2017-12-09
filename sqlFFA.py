@@ -33,7 +33,7 @@ class BaseFFA(object):
             i = 0
             for k, v in kwargs.items():
                 # <moche>
-                if k == 'v': kwargs[k]="'{}'".format(prikwargs[k])
+                if k == 'v': kwargs[k]="'{}'".format(kwargs[k])
                 if k == 'd': kwargs[k]="'{}'".format(kwargs[k])
                 # </moche>
                 if i == 0:
