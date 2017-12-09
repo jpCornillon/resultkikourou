@@ -90,6 +90,7 @@ class Tools(MyTools):
             setattr(self, key, params[key])
 
     def encodage_fichier(self, fic):
+        #return self.fictoliste(fic)
         script = './conv.sh {}'
         conv = os.system(script.format(fic))
         if conv == 256 or conv == 0:
