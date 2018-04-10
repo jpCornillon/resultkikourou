@@ -29,7 +29,7 @@ CURSOR = DB.cursor()
 
 def majBase(url):
     # ligne ci-dessous péchées ici : https://stackoverflow.com/questions/4981977/how-to-handle-response-encoding-from-urllib-request-urlopen
-    annee = '2017'
+    annee = '2018'
     courses = []
     req=urlopen(url)
     charset=req.info().get_content_charset()

@@ -51,8 +51,10 @@ class Epreuve(object):
         if lien.startswith('http://livetrail.net/histo'):
             self.nomEpreuve = lien.replace('http://livetrail.net/histo/','')
             self.type_lien=1
-        elif lien.endswith('livetrail.net'):   
-            self.nomEpreuve = lien.replace('http://','').replace('.livetrail.net', '')
+        #elif lien.endswith('livetrail.net'):   
+        elif lien.endswith('livetrail.run'):   
+            #self.nomEpreuve = lien.replace('http://','').replace('.livetrail.net', '')
+            self.nomEpreuve = lien.replace('http://','').replace('.livetrail.run', '')
             self.type_lien=2
         else:
             print('Lien pourri !!!!')
@@ -84,7 +86,8 @@ class Course(object):
         if self.type_lien == 1:
             self.lienCourse = 'http://livetrail.net/histo/{}/classement.php'.format(self.nomCourse)
         elif self.type_lien == 2:
-            self.lienCourse = 'http://{}.livetrail.net/classement.php'.format(self.nomCourse)
+            #self.lienCourse = 'http://{}.livetrail.net/classement.php'.format(self.nomCourse)
+            self.lienCourse = 'http://{}.livetrail.run/classement.php'.format(self.nomCourse)
         else:
             print('Mauvais type de lien !!!!')
             exit(1)
