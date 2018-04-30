@@ -2,6 +2,10 @@ patterns = \
    (  
          (r'[\n\r\t]', '', False )                                         ,  # tous les caracteres pourris de tabulation (tab, rc, ...)
          (r'[?"]', '', False)                                              ,  # tous les caracteres a supprimer
+         (r'M-oM-;M-?', '', True)                                          ,  # fichier pourri suppression du BOM en premiere ligne
+         (r'M-CM-\)', 'e', True)                                           ,  # fichier pourri convertit 'M-CM-' en e
+         (r'M-CM-^I', 'E', True)                                           ,  # fichier pourri convertit 'M-CM-^I' en E
+         (r'M-CM-^@', 'A', True)                                           ,  # fichier pourri convertit 'M-CM-^@' en A
          (r'[éèêë]', 'e', False)                                           ,  # remplacement des accents
          (r'[ÉÈÉÈÊË]', 'E', False)                                         ,  # remplacement des accents
          (r'[C]', 'C', False)                                              ,  #remplacement des accents
@@ -204,4 +208,5 @@ patterns = \
          (r' ;', ';',  False)                                                   ,  #sup espace-point virgule type  ' ;'
          (r'; $', '',  False)                                                   ,  #sup dernier point-virgule  avec un espace '; $'
          (r';$', '',  False)                                                    ,  #sup dernier point-virgule  type ';$' (A LAISSER EN FIN DE FICHIER)
+         (r'^place' , r'class', True)                                           ,  #modif entete ....avant l'application de enteteKikourou
    )
