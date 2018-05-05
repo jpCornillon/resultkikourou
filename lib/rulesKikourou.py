@@ -208,5 +208,5 @@ patterns = \
          (r' ;', ';',  False)                                                   ,  #sup espace-point virgule type  ' ;'
          (r'; $', '',  False)                                                   ,  #sup dernier point-virgule  avec un espace '; $'
          (r';$', '',  False)                                                    ,  #sup dernier point-virgule  type ';$' (A LAISSER EN FIN DE FICHIER)
-         (r'^place' , r'class', True)                                           ,  #modif entete ....avant l'application de enteteKikourou
+         (r'^place' , r'class', True)                                           ,  #modif entete ....avant l'application des enteteKikou
    )
