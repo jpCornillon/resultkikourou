@@ -51,10 +51,10 @@ class Epreuve(object):
         if lien.startswith('http://livetrail.net/histo'):
             self.nomEpreuve = lien.replace('http://livetrail.net/histo/','')
             self.type_lien=1
-        #elif lien.endswith('livetrail.net'):   
-        elif lien.endswith('livetrail.run'):   
-            #self.nomEpreuve = lien.replace('http://','').replace('.livetrail.net', '')
-            self.nomEpreuve = lien.replace('http://','').replace('.livetrail.run', '')
+        elif lien.endswith('livetrail.net'):   
+        #elif lien.endswith('livetrail.run'):   
+            self.nomEpreuve = lien.replace('https://','').replace('.livetrail.net', '')
+            #self.nomEpreuve = lien.replace('http://','').replace('.livetrail.run', '')
             self.type_lien=2
         else:
             print('Lien pourri !!!!')

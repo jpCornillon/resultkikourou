@@ -370,10 +370,10 @@ class Tools(MyTools):
             # </classement>
 
             # <temps>
-            ###try:
-            ###    datetime.strptime(c['temps'], '%H:%M:%S')
-            ###except:
-            ###    self.anos.setdefault('temps', []).append('format non correct <{}> : {}'.format(c['temps'], out))
+            try:
+                datetime.strptime(c['temps'], '%H:%M:%S')
+            except:
+                self.anos.setdefault('temps', []).append('format non correct <{}> : {}'.format(c['temps'], out))
             # </temps>
             
             # <nom, prenom,club>

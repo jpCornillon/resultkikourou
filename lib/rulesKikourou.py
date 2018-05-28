@@ -6,7 +6,7 @@ patterns = \
          (r'M-CM-\)', 'e', True)                                           ,  # fichier pourri convertit 'M-CM-' en e
          (r'M-CM-^I', 'E', True)                                           ,  # fichier pourri convertit 'M-CM-^I' en E
          (r'M-CM-^@', 'A', True)                                           ,  # fichier pourri convertit 'M-CM-^@' en A
-         (r'M-BM-', '', True)                                              ,  # fichier pourri convertit 'M-BM-' en rien
+         (r'M-BM-', '', False)                                             ,  # fichier pourri convertit 'M-BM-' en rien
          (r'[éèêë]', 'e', False)                                           ,  # remplacement des accents
          (r'[ÉÈÉÈÊË]', 'E', False)                                         ,  # remplacement des accents
          (r'[C]', 'C', False)                                              ,  #remplacement des accents
