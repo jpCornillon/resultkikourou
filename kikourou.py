@@ -54,6 +54,8 @@ class Factory(object):
             return HtmFactory()
         elif which == 'txt':
             return TxtFactory()
+        elif which == 'xlsx':
+            return XlsxFactory()
         elif which == 'course':
             return CourseFactory()
         else:
@@ -91,6 +93,11 @@ class HtmFactory(object):
 class TxtFactory(object):
     def genClass(self):
         return Txt()
+
+
+class XlsxFactory(object):
+    def genClass(self, options):
+        return Xlsx()
 
 
 class CourseFactory(object):
@@ -160,6 +167,29 @@ class Pdf(Tools):
         #    return True
 
 
+class Xlsx(Tools):
+    """Gestion d'un fichier xlsx :
+        - utilisation du script xls2csv.py
+        - chargement/formatage des coureurs en table
+        - ecriture fichier si OK"""
+    def start(self):
+        self.coureurs = self.xlsxtoliste()
+        if self.checkCoureurs(self.coureurs):
+            self.writeCsv(self.coureurs, self.fickikou)
+            print(BOLD, "  <{}> : correct".format(self.ficxlsx), RESET)
+            print(BOLD, "  <{}> : a tranférer sur KiKourou".format(self.fickikou), RESET)
+            # sauvegarde des fichiers de source vers sv_fic_source
+            fic = 'mv {}* {}sv_fic_source'.format(self.ficxlsx[:-4], REPWORK)
+            sv =  os.system(fic)
+        else:
+            print(BOLD, 'Fichier {} pourri'.format(self.ficxlsx), RESET)
+            self.writeCsv(self.coureurs, self.ficcsv)
+            for cle, valeur in self.anos.items():
+                print(BOLD, "\nAnomalie de type : ", cle, RESET)
+                for ano in valeur:
+                    print('   {}'.format(ano))        
+                    print('   {}'.format(ano))       
+
 class Csv(Tools):
     """Gestion d'un fichier csv :
         - lecture du csv
@@ -180,6 +210,7 @@ class Csv(Tools):
             for cle, valeur in self.anos.items():
                 print(BOLD, "\nAnomalie de type : ", cle, RESET)
                 for ano in valeur:
+                    print('   {}'.format(ano))        
                     print('   {}'.format(ano))        
 
 
@@ -376,11 +407,12 @@ def opt(argv):
         fic, _ = os.path.splitext(argv[0])
         fic = fic.split('/')[-1]
         ext = argv[0].split('.')[-1]
-        dic['which']  = '{}'.format(ext)
-        dic['ficpdf'] = '{}{}.pdf'.format(REPWORK, fic)
-        dic['ficcsv'] = '{}{}.csv'.format(REPWORK, fic)
-        dic['fictxt'] = '{}{}.txt'.format(REPWORK, fic)
-        dic['fichtm'] = '{}{}.htm'.format(REPWORK, fic)
+        dic['which']    = '{}'.format(ext)
+        dic['ficpdf']   = '{}{}.pdf'.format(REPWORK, fic)
+        dic['ficcsv']   = '{}{}.csv'.format(REPWORK, fic)
+        dic['ficxlsx']  = '{}{}.xlsx'.format(REPWORK, fic)
+        dic['fictxt']   = '{}{}.txt'.format(REPWORK, fic)
+        dic['fichtm']   = '{}{}.htm'.format(REPWORK, fic)
         dic['fickikou'] = '{}{}.csv'.format(REPDEST, fic)
         if auto:
             dic['auto'] = True

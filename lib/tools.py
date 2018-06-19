@@ -191,6 +191,28 @@ class Tools(MyTools):
             for ano in self.anos_format: print('--> ', ano)
             exit(1)
 
+    def xlsxtoliste(self):
+        '''depuis un fichier csv :
+        - decodage du fichier
+        - creation liste de coureur
+        - retour d'une liste de coureurs'''
+        #cmd = "xlsx2csv.py -d ';' -l '\n' -f '%h:%m:%s' {}".format(self.ficxlsx)
+        cmd = '''./xlsx2csv.py -d ';' -l '\\n' -f '%h:%m:%s' {}'''
+        coureurs_brut =  subprocess.Popen(cmd.format(self.ficxlsx), stdout=subprocess.PIPE, shell=True)
+        self.coureurs =  [ self.regKikou(i.decode()) for i in coureurs_brut.stdout.readlines() ]
+        self.coureurs = [ c.replace('\xa0',' ') for c in self.coureurs if c[0].isnumeric()]
+        if not self.coureurs[0].lower().startswith('class'):
+            self.entete = self.regEntete(self.choix_entete())
+            self.coureurs = self.entete.split() + self.coureurs
+        if self.check_format(): 
+            return self.listetodic()
+        else:
+            print(BOLD + '\nProbleme avec le fichier {} \
+                \nCorriger le fichier et relancer \'./kikourou.py {}'.format(self.ficxlsx, self.ficcsv) + RESET)
+            for ano in self.anos_format: print('--> ', ano)
+            self.createCsv(self.coureurs, self.ficcsv)
+            exit(1)
+
     def pdftoliste(self):
         '''depuis un fichier csv
         - utilitaire pdftotext avec creation d_un csv provisoire'''
@@ -351,6 +373,11 @@ class Tools(MyTools):
                 out.write(ligne)
         out.close()
 
+    def createCsv(self, coureurs, fic):
+        with open(fic, 'w')as out:
+            for c in coureurs:
+                out.write(c + '\n')
+
     def checkCoureurs(self, coureurs):
         '''verification du fichier produit et creation d'un tableau des anomalies'''
         retour = []
@@ -370,10 +397,10 @@ class Tools(MyTools):
             # </classement>
 
             # <temps>
-            #try:
-            #    datetime.strptime(c['temps'], '%H:%M:%S')
-            #except:
-            #    self.anos.setdefault('temps', []).append('format non correct <{}> : {}'.format(c['temps'], out))
+            try:
+                datetime.strptime(c['temps'], '%H:%M:%S')
+            except:
+                self.anos.setdefault('temps', []).append('format non correct <{}> : {}'.format(c['temps'], out))
             # </temps>
             
             # <nom, prenom,club>
