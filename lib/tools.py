@@ -322,6 +322,7 @@ class Tools(MyTools):
         # </sexe>
 
         # <temps>
+        #print(dco)
         if len(dco['temps']) == 5:
             dco['temps'] = '0:{}'.format(dco['temps'])
         if re.search('\.[0-9][0-9]$', dco['temps']):  # suppression des dixiemes de seconde
@@ -397,10 +398,13 @@ class Tools(MyTools):
             # </classement>
 
             # <temps>
-            try:
-                datetime.strptime(c['temps'], '%H:%M:%S')
-            except:
-                self.anos.setdefault('temps', []).append('format non correct <{}> : {}'.format(c['temps'], out))
+            if len(c['temps']) == 8 and int(c['temps'][:2]) > 23:
+                pass
+            else:
+                try:
+                    datetime.strptime(c['temps'], '%H:%M:%S')
+                except:
+                    self.anos.setdefault('temps', []).append('format non correct <{}> : {}'.format(c['temps'], out))
             # </temps>
             
             # <nom, prenom,club>
