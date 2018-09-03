@@ -52,10 +52,13 @@ class Epreuve(object):
             self.nomEpreuve = lien.replace('http://livetrail.net/histo/','')
             self.type_lien=1
         elif lien.endswith('livetrail.net'):   
-            self.nomEpreuve = lien.replace('http://','').replace('.livetrail.net', '')
+            # utilisation pour suppression "httpd://" ou "https://"
+            self.nomEpreuve = re.sub(r'^.*://', '', lien).replace('.livetrail.net', '')
+            # self.nomEpreuve = lien.replace('http://','').replace('.livetrail.net', '')
             self.type_lien=2
         elif lien.endswith('livetrail.run'):   
-            self.nomEpreuve = lien.replace('http://','').replace('.livetrail.run', '')
+            self.nomEpreuve = re.sub(r'^.*://', '', lien).replace('.livetrail.run', '')
+            # self.nomEpreuve = lien.replace('http://','').replace('.livetrail.run', '')
             self.type_lien=2
         elif lien.startswith('https://livetrail.net/live/'):   
             self.nomEpreuve = lien.replace('https://livetrail.net/live/','')
@@ -74,6 +77,7 @@ class Epreuve(object):
         for courses in soup.findAll('e'):
             if courses.get('id'):
                 epreuves.append(Course((self.nomEpreuve, courses.get('id'), courses.get('titre'), courses.get('sstitre'), self.type_lien)))
+            import pdb; pdb.set_trace()
         return epreuves
 
 
