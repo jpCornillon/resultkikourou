@@ -42,7 +42,12 @@ def majBase(url):
         # Attention : certains résultats (icone Rés en jaune) ne sont pas intégres car ils n'ont pas 'lisResCom' mais 'listResInc' comme class
         if 'listResCom' in td[0].get('class', []):
             # recuperation du jour/mois 
-            jj, mm = td[4].text.split('/')[0][:2], td[4].text.split('/')[1].replace('*', '')
+            # bricolage pour les dates sous cette forme : 31-02/09
+            if '-' in td[4].text and len(td[4].text) == 8:
+                a_virer = td[4].text[3:]
+                jj, mm = a_virer.split('/')[0][:2], a_virer.split('/')[1].replace('*', '')
+            else:
+                jj, mm = td[4].text.split('/')[0][:2], td[4].text.split('/')[1].replace('*', '')
             # recup du numero de course
             numero = td[8].a.get('href')[-6:]    
             # recup du departement, ville
