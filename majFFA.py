@@ -54,7 +54,7 @@ def majBase(url):
             ville = td[10].text
             dept = td[14].text.replace('\xa0','xxx')
             titre = td[8].text
-            print('aa= {} mm={}, jj={}, dept={}, ville={}, numero= {}'.format(annee, mm, jj, dept, ville, numero))
+            # print('aa= {} mm={}, jj={}, dept={}, ville={}, numero= {}'.format(annee, mm, jj, dept, ville, numero))
             tup = (annee, mm, jj, dept, ville, numero, titre)
             courses.append(tup)
     return courses
@@ -63,6 +63,7 @@ def insertDB(d):
     try : 
         CURSOR.execute('''insert or replace into resultats (annee, mois, jour, departement, ville, numero, titre) 
             values(?, ?, ?, ?, ?, ?, ?)''', d)
+        print('Ajouté dans la base : ', d)
         #DB.commit()
     except:
         print('Probleme pour : ', line)
