@@ -8,7 +8,6 @@ import sqlite3
 class BaseFFA(object):
     """docstring for baseFFA"""
 
-
     def __init__(self):
         super(BaseFFA, self).__init__()
         self.db = sqlite3.connect('sql/baseFFA.db')
