@@ -1,0 +1,11 @@
+user   : paulotrail
+passwd : 43paulotrail69
+adresse formulaire de connexion : http://www.kikourou.net/forum/ucp.php?mode=login
+
+- recuperé les cookies dans firefox - outil webdevelopper -
+- passer les 4 cookies a wget : 
+wget --no-cookies --header "Cookie: PHPSESSID=cce6841fac29060e151fbc64eb527442;phpbb3_kkr_k=c2d5bed3ea82eee8;phpbb3_kkr_sid=0b74fc85993d6437f2288d4c5b462f0f;phpbb3_kkr_u=18684 "  http://www.kikourou.net/photos/courses/34668-123378-639-trails_du_brevon_67.pdf
+
+wget -O all_result.html --no-cookies --header "Cookie: PHPSESSID=cce6841fac29060e151fbc64eb527442;phpbb3_kkr_k=c2d5bed3ea82eee8;phpbb3_kkr_sid=0b74fc85993d6437f2288d4c5b462f0f;phpbb3_kkr_u=18684 " http://www.kikourou.net/resultats/ajoutresultat.php
+
+
