@@ -5,20 +5,21 @@
 import sys
 import sqlite3
 #
+BASEFFA='/home/paulo/dropbox/python/django/projets/resultats/resultats.sqlite3'
 class BaseFFA(object):
     """docstring for baseFFA"""
 
     def __init__(self):
         super(BaseFFA, self).__init__()
-        self.db = sqlite3.connect('sql/baseFFA.db')
+        self.db = sqlite3.connect(BASEFFA)
         
     def readDB(self, *kargs, **kwargs):
         dic = dict({'aa': 'annee', 'mm': 'mois', 'jj':'jour', 'd': 'departement', 'v': 'ville'})
         #sqlbase = 'select annee, mois, jour, ville, titre, numero, departement from resultats'
         if len(kwargs.keys()) == 0:
-            sql = 'select annee, mois, jour, ville, titre, numero, departement from resultats'
+            sql = 'select annee, mois, jour, ville, titre, numero, departement from ffa'
         elif len(kwargs.keys()) == 1:
-                sqlbase = 'select annee, mois, jour, ville, titre, numero, departement from resultats'
+                sqlbase = 'select annee, mois, jour, ville, titre, numero, departement from ffa'
                 where = ' where {}={}'
                 k = ','.join(kwargs.keys())
                 # <moche>
@@ -28,7 +29,7 @@ class BaseFFA(object):
                 sql = sqlbase + where.format( dic[k], kwargs[k] )
         else:            
             add_where = ''
-            sqlbase = 'select annee, mois, jour, ville, titre, numero, departement from resultats where '
+            sqlbase = 'select annee, mois, jour, ville, titre, numero, departement from ffa where '
             i = 0
             for k, v in kwargs.items():
                 # <moche>
@@ -47,7 +48,7 @@ class BaseFFA(object):
             #VOIR CASE SUR LES REQUETES WHERE 
             #VOIR UN EVENTUEL LIKE
 
-        db = sqlite3.connect('sql/baseFFA.db')
+        db = sqlite3.connect(BASEFFA)
         cursor =db.cursor()
         cursor.execute(sql)
         for row  in cursor:

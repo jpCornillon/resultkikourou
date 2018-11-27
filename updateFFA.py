@@ -81,6 +81,9 @@ def nb_page(self):
 
 
 def main():
+    print('Script obsolete, utiliser updateFFA.py dans django !!!!\n' * 20)
+    sys.exit()
+
     '''Le lien ci-dessous pointe sur la page des dernieres maj sur la base athlé FFA'''
     url = 'http://bases.athle.com/asp.net/accueil.aspx?frmbase=resultats'
     courses = majBase(url)
