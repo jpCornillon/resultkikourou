@@ -393,11 +393,17 @@ class Tools(MyTools):
                 out = out + '<{}={}> '.format(k,v)
             # <classement>
             i += 1
-            if int(c['class']) != i:
-                self.anos.setdefault('sequencement', []).append('classement attendu {}, trouve {} : {}'.format(i, int(c['class']), out))
+            try:
+                if int(c['class']) != i:
+                    self.anos.setdefault('sequencement', []).append('classement attendu {}, trouve {} : {}'.format(i, int(c['class']), out))
+            except:
+                self.anos.setdefault('sequencement', []).append('classement attendu {}, trouve {} : {}'.format(i, c['class'], out))
+            # if int(c['class']) != i:
+                # self.anos.setdefault('sequencement', []).append('classement attendu {}, trouve {} : {}'.format(i, int(c['class']), out))
             # </classement>
 
             # <temps>
+            # print(c)
             if len(c['temps']) == 8 and int(c['temps'][:2]) > 23:
                 pass
             else:
@@ -405,7 +411,7 @@ class Tools(MyTools):
                     datetime.strptime(c['temps'], '%H:%M:%S')
                 except:
                     self.anos.setdefault('temps', []).append('format non correct <{}> : {}'.format(c['temps'], out))
-            # </temps>
+           # </temps>
             
             # <nom, prenom,club>
             if '.' in c['nom']:
