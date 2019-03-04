@@ -205,7 +205,7 @@ class Csv(Tools):
             fic = 'mv {}* {}sv_fic_source'.format(self.ficcsv[:-4], REPWORK)
             sv =  os.system(fic)
         else:
-            print('<{}> NOK'.format(self.ficcsv))
+            print('<{}> BAD'.format(self.ficcsv))
             self.writeCsv(self.coureurs, self.ficcsv)
             for cle, valeur in self.anos.items():
                 print('anomalie : ', cle)
