@@ -146,7 +146,7 @@ class Pdf(Tools):
         if self.checkCoureurs(self.coureurs):
             self.writeCsv(self.coureurs, self.fickikou)
             print(BOLD, "  <{}> : correct".format(self.ficpdf), RESET)
-            print(BOLD, "  <{}> : a tranférer sur KiKourou".format(self.fickikou), RESET)
+            print(BOLD, "  <vim {}> : a transférer sur KiKourou".format(self.fickikou), RESET)
             # sauvegarde des fichiers de source vers sv_fic_source
             fic = 'mv {}* {}sv_fic_source'.format(self.ficcsv[:-4], REPWORK)
             sv =  os.system(fic)
@@ -177,7 +177,7 @@ class Xlsx(Tools):
         if self.checkCoureurs(self.coureurs):
             self.writeCsv(self.coureurs, self.fickikou)
             print(BOLD, "  <{}> : correct".format(self.ficxlsx), RESET)
-            print(BOLD, "  <{}> : a tranférer sur KiKourou".format(self.fickikou), RESET)
+            print(BOLD, "  <vim {}> : a transférer sur KiKourou".format(self.fickikou), RESET)
             # sauvegarde des fichiers de source vers sv_fic_source
             fic = 'mv {}* {}sv_fic_source'.format(self.ficxlsx[:-4], REPWORK)
             sv =  os.system(fic)
@@ -200,7 +200,7 @@ class Csv(Tools):
         if self.checkCoureurs(self.coureurs):
             self.writeCsv(self.coureurs, self.fickikou)
             print(BOLD, "  <{}> : correct".format(self.ficcsv), RESET)
-            print(BOLD, "  <{}> : a tranférer sur KiKourou".format(self.fickikou), RESET)
+            print(BOLD, "  <vim {}> : a transférer sur KiKourou".format(self.fickikou), RESET)
             # sauvegarde des fichiers de source vers sv_fic_source
             fic = 'mv {}* {}sv_fic_source'.format(self.ficcsv[:-4], REPWORK)
             sv =  os.system(fic)
@@ -286,7 +286,7 @@ class Course(Tools):
                 if self.checkCoureurs(self.coureurs):
                     dest = self.fic_epreuve.replace('/source/', '/csv/')
                     print(BOLD, ' - <{}> : correct'.format(self.fic_epreuve), RESET)
-                    print(BOLD, ' - <{}> : a tranférer sur KiKourou'.format(dest), RESET)
+                    print(BOLD, ' - <vim {}> : a transférer sur KiKourou'.format(dest), RESET)
                     self.writeCsv(self.coureurs, dest)
                 else:
                     print(BOLD, ' - fichier {} pourri'.format(self.fic_epreuve), RESET)

@@ -90,9 +90,10 @@ class Tools(MyTools):
             setattr(self, key, params[key])
 
     def encodage_fichier(self, fic):
-        #return self.fictoliste(fic)
+        # return self.fictoliste(fic)
         script = 'dos2unix {}'
         conv = os.system(script.format(fic))
+        # script = '/home/paulo/dropbox/kikourou_ori/fichier/source/conv.sh {}'
         script = './conv.sh {}'
         conv = os.system(script.format(fic))
         if conv == 256 or conv == 0:
@@ -368,9 +369,9 @@ class Tools(MyTools):
             #out.write(self.entete)
             for c in coureurs:
                 if 'prenom' in c.keys():
-                    ligne = u'{};{};{} {};{};{};{};\n'.format(c['class'], c['temps'], c['nom'], c['prenom'], c['cat'][0:2], c['sexe'], c['club'].strip())
+                    ligne = u'{};{};{} {};{};{};{};\n'.format(c['class'], c['temps'], c['nom'], c['prenom'], c['cat'][0:2], c['sexe'].capitalize(), c['club'].strip())
                 else:
-                    ligne = u'{};{};{};{};{};{};\n'.format(c['class'], c['temps'], c['nom'], c['cat'][0:2], c['sexe'], c['club'].strip())
+                    ligne = u'{};{};{};{};{};{};\n'.format(c['class'], c['temps'], c['nom'], c['cat'][0:2], c['sexe'].capitalize(), c['club'].strip())
                 out.write(ligne)
         out.close()
 
