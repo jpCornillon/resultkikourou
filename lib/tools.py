@@ -369,9 +369,9 @@ class Tools(MyTools):
             #out.write(self.entete)
             for c in coureurs:
                 if 'prenom' in c.keys():
-                    ligne = u'{};{};{} {};{};{};{};\n'.format(c['class'], c['temps'], c['nom'], c['prenom'], c['cat'][0:2], c['sexe'].capitalize(), c['club'].strip())
+                    ligne = u'{};{};{} {};{};{};{};\n'.format(c['class'], c['temps'], c['nom'], c['prenom'], c['cat'][0:2].capitalize(), c['sexe'].capitalize(), c['club'].strip())
                 else:
-                    ligne = u'{};{};{};{};{};{};\n'.format(c['class'], c['temps'], c['nom'], c['cat'][0:2], c['sexe'].capitalize(), c['club'].strip())
+                    ligne = u'{};{};{};{};{};{};\n'.format(c['class'], c['temps'], c['nom'], c['cat'][0:2].capitalize(), c['sexe'].capitalize(), c['club'].strip())
                 out.write(ligne)
         out.close()
 
@@ -383,7 +383,7 @@ class Tools(MyTools):
     def checkCoureurs(self, coureurs):
         '''verification du fichier produit et creation d'un tableau des anomalies'''
         retour = []
-        cat = ['SE', 'V1', 'V2', 'V3', 'V4', 'V5', 'JU',
+        cat = ['SE', 'S1', 'S2', 'S3', 'S4', 'S5', 'V1', 'V2', 'V3', 'V4', 'V5', 'JU',
                'CA', 'ES', 'MI', 'BE', 'PO', 'EA', 'HD', 'HA']
         sex = ['M', 'F']
         self.anos = {}
