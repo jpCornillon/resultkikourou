@@ -369,9 +369,9 @@ class Tools(MyTools):
             #out.write(self.entete)
             for c in coureurs:
                 if 'prenom' in c.keys():
-                    ligne = u'{};{};{} {};{};{};{};\n'.format(c['class'], c['temps'], c['nom'], c['prenom'], c['cat'][0:2].capitalize(), c['sexe'].capitalize(), c['club'].strip())
+                    ligne = u'{};{};{} {};{};{};{};\n'.format(c['class'], c['temps'], c['nom'], c['prenom'], c['cat'][0:2].upper(), c['sexe'].upper(), c['club'].strip())
                 else:
-                    ligne = u'{};{};{};{};{};{};\n'.format(c['class'], c['temps'], c['nom'], c['cat'][0:2].capitalize(), c['sexe'].capitalize(), c['club'].strip())
+                    ligne = u'{};{};{};{};{};{};\n'.format(c['class'], c['temps'], c['nom'], c['cat'][0:2].upper(), c['sexe'].upper(), c['club'].strip())
                 out.write(ligne)
         out.close()
 
