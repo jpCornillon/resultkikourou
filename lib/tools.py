@@ -314,6 +314,7 @@ class Tools(MyTools):
         # </cat>
         
         # <sexe>
+        # print(dco)
         if 'sexe' not in dco.keys():
             dco['sexe'] = ''
         if (dco['sexe'] == '' and (dco['cat'][-1] == 'H' or dco['cat'][-1] == 'M')) or dco['sexe'] == 'H':

@@ -20,8 +20,8 @@ def main():
             - nom du fichier en sortie
             - indice de la zone de nom
     '''
-    ficin = '/home/paulo/dropbox/kikourou_ori/fichiers/source/caborn22.csv'
-    ficout = '/home/paulo/dropbox/kikourou_ori/fichiers/source/caborn22_inverse.csv'
+    ficin = '/home/paulo/dropbox/kikourou_ori/fichiers/source/allo66.csv'
+    ficout = '/home/paulo/dropbox/kikourou_ori/fichiers/source/allo66_inverse.csv'
     anos=[]
     with open(ficin) as fic:
        coureurs = [ i.split(';') for i in fic.readlines() ]
