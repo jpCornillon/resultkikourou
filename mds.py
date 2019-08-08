@@ -9,8 +9,8 @@ from bs4 import BeautifulSoup
 import re
 from time import sleep
 
-# fic = '/home/paulo/dropbox/kikourou_ori/fichiers/source/mdsPaulo.csv'
-fic = '/home/paulo/dropbox/kikourou_ori/fichiers/source/mdsKikou.htm'
+# fic = '/home/paulo/nextcloud/kikourou/fichiers/source/mdsPaulo.csv'
+fic = '/home/paulo/nextcloud/kikourou/fichiers/source/mdsKikou.htm'
 html = open(fic, 'rb')
 soup = BeautifulSoup(html, 'lxml')
 for tr in soup.select("tr"):

@@ -93,7 +93,7 @@ class Tools(MyTools):
         # return self.fictoliste(fic)
         script = 'dos2unix {}'
         conv = os.system(script.format(fic))
-        # script = '/home/paulo/dropbox/kikourou_ori/fichier/source/conv.sh {}'
+        # script = '/home/paulo/nextcloud/kikourou/fichier/source/conv.sh {}'
         script = './conv.sh {}'
         conv = os.system(script.format(fic))
         if conv == 256 or conv == 0:
@@ -314,12 +314,16 @@ class Tools(MyTools):
         # </cat>
         
         # <sexe>
+        #print(dco)
         if 'sexe' not in dco.keys():
             dco['sexe'] = ''
-        if (dco['sexe'] == '' and (dco['cat'][-1] == 'H' or dco['cat'][-1] == 'M')) or dco['sexe'] == 'H':
-            dco['sexe'] = 'M'
-        elif dco['sexe'] == '' and (dco['cat'][-1] == 'F' or dco['cat'][-1] == 'F'):
-            dco['sexe'] = 'F'
+        try: 
+            if (dco['sexe'] == '' and (dco['cat'][-1] == 'H' or dco['cat'][-1] == 'M')) or dco['sexe'] == 'H':
+                dco['sexe'] = 'M'
+            elif dco['sexe'] == '' and (dco['cat'][-1] == 'F' or dco['cat'][-1] == 'F'):
+                dco['sexe'] = 'F'
+        except:
+            raise('Problème : ', dco)
         # </sexe>
 
         # <temps>

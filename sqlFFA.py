@@ -5,7 +5,7 @@
 import sys
 import sqlite3
 #
-BASEFFA='/home/paulo/dropbox/python/django/projets/resultats/resultats.sqlite3'
+BASEFFA='/home/paulo/nextcloud/python/django/projets/resultats/resultats.sqlite3'
 class BaseFFA(object):
     """docstring for baseFFA"""
 

@@ -24,9 +24,9 @@ from lib import Tools
 # globales
 
 ####################### a modifier en fonction de son environement ####################
-#FICDIR = '{}{}'.format(os.environ['HOME'], '/dropbox/kikourou/fichiers/source/')
-REPWORK = '{}{}'.format(os.environ['HOME'], '/dropbox/kikourou_ori/fichiers/source/')
-REPDEST = '{}{}'.format(os.environ['HOME'], '/dropbox/kikourou_ori/fichiers/csv/')
+#FICDIR = '{}{}'.format(os.environ['HOME'], '/nextcloud/kikourou/fichiers/source/')
+REPWORK = '{}{}'.format(os.environ['HOME'], '/nextcloud/kikourou/fichiers/source/')
+REPDEST = '{}{}'.format(os.environ['HOME'], '/nextcloud/kikourou/fichiers/csv/')
 #######################################################################################
 #
 
@@ -297,7 +297,7 @@ class Course(Tools):
                             print('   {}'.format(ano))        
 
     def nb_participants(self):
-        # html = urlopen('file:///home/paulo/dropbox/kikourou/testCourse0.htm')
+        # html = urlopen('file:///home/paulo/nextcloud/kikourou/testCourse0.htm')
         html = urlopen(self.url_epreuve)
         soup = BeautifulSoup(html, 'lxml')
         nb = [i for i in soup.find(True, {'class': ['barCount']})]

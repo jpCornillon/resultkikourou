@@ -25,7 +25,7 @@ from lib import rulesBaseFFA  as FFA
 #####################################################
 # globales
 # import pdb; pdb.set_trace()
-FICDIR = '{}/dropbox/kikourou/'.format(os.environ['HOME'])
+FICDIR = '{}/nextcloud/kikourou/'.format(os.environ['HOME'])
 BOLD = "\033[1m"
 RESET = "\033[0;0m"
 #
@@ -195,7 +195,7 @@ def consult_courseFFA(datas):
 def listetofic(fic, epreuve, liste):
     '''ecriture fichier depuis une liste'''
     r = ApplyRegex(kikourou.patterns)
-    #fichier = '/home/paulo/dropbox/kikourou/fichiers/source/{}.html'.format(fic)
+    #fichier = '/home/paulo/nextcloud/kikourou/fichiers/source/{}.html'.format(fic)
     fichier = '{}/fichiers/source/{}_{}.txt'.format(FICDIR, fic, epreuve)
     entete = 'class;temps;nom;club;cat\n'
     try:

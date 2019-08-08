@@ -33,8 +33,8 @@ from lib import Tools
 #
 # globales
 ####################### a modifier en fonction de son environement ####################
-REPWORK = '{}{}'.format(os.environ['HOME'], '/dropbox/kikourou_ori/fichiers/source/')
-REPDEST = '{}{}'.format(os.environ['HOME'], '/dropbox/kikourou_ori/fichiers/csv/')
+REPWORK = '{}{}'.format(os.environ['HOME'], '/nextcloud/kikourou/fichiers/source/')
+REPDEST = '{}{}'.format(os.environ['HOME'], '/nextcloud/kikourou/fichiers/csv/')
 BOLD = "\033[1m"
 RESET = "\033[0;0m"
 # import pdb; pdb.set_trace()

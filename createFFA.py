@@ -18,9 +18,9 @@ from lib import Tools
 # globales
 
 ####################### a modifier en fonction de son environement ####################
-#FICDIR = '{}{}'.format(os.environ['HOME'], '/dropbox/kikourou/fichiers/source/')
-REPWORK = '{}{}'.format(os.environ['HOME'], '/dropbox/kikourou_ori/fichiers/source/')
-REPDEST = '{}{}'.format(os.environ['HOME'], '/dropbox/kikourou_ori/fichiers/csv/')
+#FICDIR = '{}{}'.format(os.environ['HOME'], '/nextcloud/kikourou/fichiers/source/')
+REPWORK = '{}{}'.format(os.environ['HOME'], '/nextcloud/kikourou/fichiers/source/')
+REPDEST = '{}{}'.format(os.environ['HOME'], '/nextcloud/kikourou/fichiers/csv/')
 #######################################################################################
 #
 

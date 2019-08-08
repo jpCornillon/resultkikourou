@@ -6,7 +6,7 @@ import codecs
 import encodings
 import chardet
 
-# fic = '/home/paulo/dropbox/kikourou_ori/fichiers/source/sassenage11.csv'
+# fic = '/home/paulo/nextcloud/kikourou/fichiers/source/sassenage11.csv'
 
 # code = 'utf8'
 

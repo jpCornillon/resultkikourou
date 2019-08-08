@@ -26,14 +26,14 @@ sudo yum install python3-beautifulsoup4 [ou] pip install beautifulsoup4
 
 ### Utilisation du script 'kikourou.py'
 Produit : 
-- dans le meilleur des cas un fichier csv correct dans $HOME/dropbox/kikourou/fichier/csv/
+- dans le meilleur des cas un fichier csv correct dans $HOME/nextcloud/kikourou/fichier/csv/
 - une liste d'anomalies à corriger (dans un fichier 'nom_de_la_course'.txt
 - rien du tout !
 
 Plusieurs options d'utilisation du script
 - traitement d'un fichier :
 ```bash
-./kikourou.py $HOME/dropbox/kikourou/fichiers/source/course.[pdf, csv]
+./kikourou.py $HOME/nextcloud/kikourou/fichiers/source/course.[pdf, csv]
 ```
 
 - consultation résultat base FFA [annee: 2016, mois: Juillet, departement: 73]
@@ -58,7 +58,7 @@ Produit :
 
 ### Utilisation du script 'all_result.py'
 Utilisation : 
-- avant de lancer ce script, il faut creer un fichier htm [ $HOME/dropbox/kikourou_files/resultat.htm ] qui contient la liste des résultats de course que l'on veut récupérer (depuis www.kikourou.net)
+- avant de lancer ce script, il faut creer un fichier htm [ $HOME/nextcloud/kikourou_files/resultat.htm ] qui contient la liste des résultats de course que l'on veut récupérer (depuis www.kikourou.net)
 Il faut faire un copier-coller de la balise '<ul>....</ul>' dans le fichier htm (ça prend un peu de temps, il y a beaucoup de  résultat et c'est du html...)
 ![Preview](kikourou.png 'copier la balise <ul>...</ul>')
 - faire un peu de ménage dans le fichier obtenu : supprimer tous les premiers résultats par exemple permet de gagner pas mal de temps
@@ -77,7 +77,7 @@ Ce script est utilisé dans 'kikourou.py' mais peut aussi se lancer en ligne de 
 Après diverses gruikeries, il produit (ou pas) un fichier csv correct.
 Lancement :
 ```bash
-./gesCSV.py $HOME/dropbox/kikourou/files/course.csv
+./gesCSV.py $HOME/nextcloud/kikourou/files/course.csv
 ```
 
 ### Utilisation du script 'conv.sh'
@@ -89,5 +89,5 @@ Ce script tente de résoudre les problèmes d'encodage sur les fichiers transmis
 Il peut être utilisé directement dans le terminal mais il est aussi utilisé dans 'kikourou.py'
 Lancement :
 ```bash
-./conv.sh $HOME/dropbox/kikourou/files/course.csv
+./conv.sh $HOME/nextcloud/kikourou/files/course.csv
 ```

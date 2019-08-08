@@ -6,7 +6,7 @@ then
     echo '-------------------------------------------------------------'
     exit 1
 fi
-#dir='/home/xxxxx/dropbox/kikourou/fichiers/source/'
+#dir='/home/xxxxx/nextcloud/kikourou/fichiers/source/'
 dir=''
 nomfic=${1}
 svfic=${1}_av_iconv

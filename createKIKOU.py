@@ -18,7 +18,7 @@ from lib import rulesBaseFFA  as FFA
 #####################################################
 # globales
 # import pdb; pdb.set_trace()
-FICDIR = '{}/dropbox/kikourou_ori/'.format(os.environ['HOME'])
+FICDIR = '{}/nextcloud/kikourou/'.format(os.environ['HOME'])
 BOLD = "\033[1m"
 RESET = "\033[0;0m"
 #

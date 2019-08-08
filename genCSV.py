@@ -23,7 +23,7 @@ from lib import enteteKikourou as entete
 # globales
 BOLD = "\033[1m"
 RESET = "\033[0;0m"
-#FICDIR = '{}{}'.format(os.environ['HOME'], '/dropbox/kikourou_ori/fichiers/source/')
+#FICDIR = '{}{}'.format(os.environ['HOME'], '/nextcloud/kikourou/fichiers/source/')
 #
 # ATTENTION : il faut adapter TXT en fonction du fichier d entree
 # TXT_AVEC_CLUB= ['class', 'nom', 'club', 'cat', 'temps']
@@ -214,9 +214,9 @@ def main(argv):
         numAuto = False
     fic_sans_extension = os.path.splitext(os.path.basename(fic))[0]
     fic_avec_extension = os.path.basename(fic)
-    FIC     = '{}{}{}'.format(os.environ['HOME'], '/dropbox/kikourou_ori/fichiers/source/', fic_avec_extension)
-    FICCSV  = '{}{}{}.csv'.format(os.environ['HOME'], '/dropbox/kikourou_ori/fichiers/source/', fic_sans_extension)
-    FICDEST = '{}{}{}.csv'.format(os.environ['HOME'], '/dropbox/kikourou_ori/fichiers/csv/'   , fic_sans_extension)
+    FIC     = '{}{}{}'.format(os.environ['HOME'], '/nextcloud/kikourou/fichiers/source/', fic_avec_extension)
+    FICCSV  = '{}{}{}.csv'.format(os.environ['HOME'], '/nextcloud/kikourou/fichiers/source/', fic_sans_extension)
+    FICDEST = '{}{}{}.csv'.format(os.environ['HOME'], '/nextcloud/kikourou/fichiers/csv/'   , fic_sans_extension)
     coureurs = lecFic(FIC, numAuto)
     coureursCSV = lstCSV(coureurs)
     anomalies = checkCoureurs(coureurs)
@@ -227,7 +227,7 @@ def main(argv):
         fic = "cp {} {}"
         cp = os.system(fic.format(FICCSV, FICDEST))
         # on sauve le source
-        fic = "mv /home/paulo/dropbox/kikourou_ori/fichiers/source/{}*  /home/paulo/dropbox/kikourou_ori/fichiers/source/sv_fic_source"
+        fic = "mv /home/paulo/nextcloud/kikourou/fichiers/source/{}*  /home/paulo/nextcloud/kikourou/fichiers/source/sv_fic_source"
         sv = os.system(fic.format(fic_sans_extension))
     else:
         print(BOLD, "Fichier {} pourri".format(FICCSV), RESET)
