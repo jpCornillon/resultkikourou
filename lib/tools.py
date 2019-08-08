@@ -314,7 +314,7 @@ class Tools(MyTools):
         # </cat>
         
         # <sexe>
-        #print(dco)
+        # print(dco)
         if 'sexe' not in dco.keys():
             dco['sexe'] = ''
         try: 

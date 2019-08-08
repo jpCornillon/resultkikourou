@@ -10,7 +10,7 @@ import re
 import requests                                        # sudo dnf install python3-requests
 from urllib.request import urlopen, ProxyHandler       # sudo dnf install  python3-urllib
 import socket
-from bs4 import BeautifulSoup                          # sudo dnf install python3-beautifulsoup
+from bs4 import BeautifulSoup                          # sudo dnf install python3-beautifulsoup4
 import chardet                                         # detection encodage fichier (installé d'origine ???)
 from time import sleep
 # classes locales
