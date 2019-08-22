@@ -323,7 +323,8 @@ class Tools(MyTools):
             elif dco['sexe'] == '' and (dco['cat'][-1] == 'F' or dco['cat'][-1] == 'F'):
                 dco['sexe'] = 'F'
         except:
-            raise('Problème : ', dco)
+            print(dco)
+            #raise('Problème : ', dco)
         # </sexe>
 
         # <temps>

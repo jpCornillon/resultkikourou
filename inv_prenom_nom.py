@@ -20,8 +20,9 @@ def main():
             - nom du fichier en sortie
             - indice de la zone de nom
     '''
-    ficin = '/home/paulo/nextcloud/kikourou/fichiers/source/allo66.csv'
-    ficout = '/home/paulo/nextcloud/kikourou/fichiers/source/allo66_inverse.csv'
+    fic = 'bk42'
+    ficin = '/home/paulo/nextcloud/kikourou/fichiers/source/{}.csv'.format(fic)
+    ficout = '/home/paulo/nextcloud/kikourou/fichiers/source/{}_inverse.csv'.format(fic)
     anos=[]
     with open(ficin) as fic:
        coureurs = [ i.split(';') for i in fic.readlines() ]
